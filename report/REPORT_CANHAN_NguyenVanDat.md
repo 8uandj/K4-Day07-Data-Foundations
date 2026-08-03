@@ -183,3 +183,8 @@ Chiến lược tạo **126 chunks**, độ dài trung bình **580,8 ký tự** 
 | Dự đoán độ tương tự | 5 / 5 |
 | Kết quả truy xuất của tôi | 10 / 10 |
 | **Tổng phần cá nhân** | **59 / 60** |
+<<<<<<< HEAD
+=======
+
+> Lưu ý: năm câu hỏi đánh giá trên cần được nhóm Minions sao chép nguyên văn sang `REPORT_NHOM.md` để bảo đảm mọi thành viên dùng cùng một benchmark.
+>>>>>>> 16c0cf4 (Add personal report for Lab 7 and implement UI for RAG Observatory)

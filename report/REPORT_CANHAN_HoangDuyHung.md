@@ -4,7 +4,10 @@
 **Nhóm:** MINIONS  
 **Ngày:** 03/08/2026
 
-> Phạm vi cá nhân: hoàn thiện toàn bộ `src/`, thử chiến lược `RecursiveChunker` với metadata filter, và đánh giá trên corpus chính sách Shopee.
+> Phạm vi cá nhân: hoàn thiện bản triển khai riêng tại `src/K4_01908_HoangDuyHung/`, thử chiến lược `RecursiveChunker` với metadata filter, và đánh giá trên corpus chính sách Shopee.
+
+> Code cá nhân: `src/K4_01908_HoangDuyHung/`<br>
+> Chiến lược chính: `RecursiveChunker(chunk_size=300)` + filter `customer_role=seller` cho câu hỏi hướng đến người bán.
 
 ## 1. Khởi động (Warm-up)
 
@@ -66,6 +69,13 @@ Store tự bổ sung `metadata['doc_id']` từ `Document.id` nếu metadata chư
 
 Agent truy xuất các chunk liên quan, nối chúng thành phần `Context`, sau đó tạo prompt yêu cầu LLM chỉ sử dụng context để trả lời. Nếu không có kết quả, agent trả về thông báo không tìm thấy thông tin thay vì tự tạo câu trả lời.
 
+### Dữ liệu và thiết lập cá nhân
+
+- Corpus gồm 10 tài liệu chính sách Shopee được quản lý trong `data/shopee_ecommerce/sources.csv`.
+- Với `RecursiveChunker(chunk_size=300)`, corpus tạo ra 320 chunks; số chunk mỗi tài liệu từ 2 đến 101, trung bình 32 chunks/tài liệu.
+- Metadata được giữ theo schema thống nhất, trong đó `doc_id` dùng để truy vết nguồn và `customer_role` dùng cho lọc theo vai trò khách hàng/người bán.
+- Benchmark dùng `top_k=3` và `_mock_embed` để kiểm tra pipeline; kết quả này chưa đại diện cho chất lượng embedding ngữ nghĩa.
+
 ## 3. Hoàn thiện code
 
 Đã hoàn thiện các phần:
@@ -77,7 +87,7 @@ Agent truy xuất các chunk liên quan, nối chúng thành phần `Context`, s
 - `EmbeddingStore`
 - `KnowledgeBaseAgent`
 
-Kết quả xác minh bằng bộ 42 test của lab:
+Kết quả xác minh bằng bộ 42 test của lab đã được ghi nhận trên bản code cá nhân trước khi đưa các file mẫu ban đầu trở lại `src/`:
 
 ```text
 python -m unittest discover -s tests -v
@@ -85,7 +95,21 @@ Ran 42 tests
 OK
 ```
 
-Trong môi trường hiện tại, lệnh `pytest` chưa được cài đặt. Khi nộp bài, cần chạy thêm `pytest tests/ -v` trong môi trường Python 3.11 có đầy đủ dependency.
+Trong môi trường hiện tại, lệnh `pytest` chưa được cài đặt. Vì vậy kết quả trên được ghi bằng unittest; khi nộp bài có thể chạy thêm `pytest tests/ -v` trong môi trường Python 3.11 có đầy đủ dependency.
+
+### Benchmark retrieval đã chạy
+
+Thiết lập: corpus 10 tài liệu Shopee, `RecursiveChunker(chunk_size=300)`, `top_k=3`, backend `_mock_embed`.
+
+| # | Query | Top-1 document | Score | Tài liệu liên quan trong top-3? |
+|---:|---|---|---:|---|
+| 1 | Người mua có thể yêu cầu trả hàng trong thời hạn bao lâu? | `shopee-complaint-001` | 0.336859 | Không |
+| 2 | Người bán phải làm gì khi đóng gói hàng hóa để vận chuyển? | `shopee-product-listing-rules` | 0.411064 | Không |
+| 3 | Những sản phẩm nào bị cấm hoặc hạn chế đăng bán? | `shopee-return-refund-policy` | 0.330499 | Không |
+| 4 | Người bán cần phản hồi yêu cầu hoàn tiền trong bao lâu? | `shopee-product-listing-rules` | 0.323891 | Có, nhưng không ở top-1 |
+| 5 | Vì sao đơn hàng có thể bị hủy do người bán? | `shopee-seller-anti-fraud-policy` | 0.332880 | Không |
+
+**Kết quả:** 1/5 câu có tài liệu liên quan trong top-3. Đây là kết quả với mock embedding; cần chạy lại bằng `EMBEDDING_PROVIDER=local` trước khi kết luận chiến lược retrieval nào tốt hơn.
 
 ## 4. Dự đoán độ tương tự
 
@@ -101,21 +125,43 @@ Các điểm dưới đây được tính bằng `_mock_embed`. Mock embedder l�
 
 Điều gây bất ngờ là hai câu gần như đồng nghĩa ở cặp 1 vẫn có score gần 0. Điều này cho thấy mock embedding không biểu diễn tốt ngữ nghĩa tiếng Việt; benchmark retrieval cần chạy lại với local multilingual embedder.
 
+Quy ước đánh giá là dự đoán cao/thấp trước khi xem score, không đặt một ngưỡng tuyệt đối cho mọi cặp câu. Vì `_mock_embed` sinh vector xác định nhưng không có năng lực ngữ nghĩa, các score chỉ có giá trị kiểm tra tính chạy được của pipeline.
+
 ## 5. Kết quả truy xuất của tôi
 
-Chiến lược cá nhân: `RecursiveChunker(chunk_size=300)`, metadata đầy đủ theo schema và filter theo `customer_role` khi câu hỏi hướng đến người bán. Bộ câu hỏi dưới đây là bộ benchmark tạm dùng để kiểm tra pipeline trên 10 tài liệu Shopee.
+Chiến lược cá nhân: `RecursiveChunker(chunk_size=300)`, metadata đầy đủ theo schema và filter theo `customer_role` khi câu hỏi hướng đến người bán. Bộ câu hỏi dưới đây là bộ benchmark chung của nhóm, chạy trên 10 tài liệu Shopee.
 
 | # | Câu hỏi | Top-1 chunk | Score | Liên quan trong top-3? | Nhận xét |
 |---:|---|---|---:|---|---|
-| 1 | Người mua có thể yêu cầu trả hàng trong thời hạn bao lâu? | `shopee-complaint-001` | 0.336859 | Không rõ/không đủ | Mock ưu tiên chunk khiếu nại thay vì thời hạn trả hàng |
-| 2 | Người bán phải làm gì khi đóng gói hàng hóa để vận chuyển? | `shopee-product-listing-rules` | 0.411064 | Không | Không lấy đúng chính sách vận chuyển |
+| 1 | Người mua có thể yêu cầu trả hàng trong thời hạn bao lâu? | `shopee-complaint-001` | 0.336859 | Không | Top-3 không chứa tài liệu quy định thời hạn trả hàng phù hợp |
+| 2 | Người bán phải làm gì khi đóng gói hàng hóa để vận chuyển? | `shopee-product-listing-rules` | 0.411064 | Không | Không lấy đúng `shopee-shipping-policy` |
 | 3 | Những sản phẩm nào bị cấm hoặc hạn chế đăng bán? | `shopee-return-refund-policy` | 0.330499 | Không | Kết quả bị nhiễu bởi mock embedding |
 | 4 | Người bán cần phản hồi yêu cầu hoàn tiền trong bao lâu? | `shopee-product-listing-rules` | 0.323891 | Có, nhưng không ở top-1 | Có tài liệu trả hàng trong top-3 nhưng thứ hạng chưa tốt |
-| 5 | Vì sao đơn hàng có thể bị hủy do người bán? | `shopee-seller-anti-fraud-policy` | 0.332880 | Không | Chưa truy xuất đúng FAQ hủy đơn |
+| 5 | Vì sao đơn hàng có thể bị hủy do người bán? | `shopee-seller-anti-fraud-policy` | 0.332880 | Không | Không lấy đúng FAQ hủy đơn |
 
-Kết quả mock: **1/5 câu có tài liệu liên quan trong top-3**. Đây không phải kết luận cuối về chiến lược vì README yêu cầu dùng `EMBEDDING_PROVIDER=local` để đánh giá retrieval có ý nghĩa. Khi chạy local, cần ghi lại top-3 và score mới vào bảng này.
+Kết quả mock: **1/5 câu có tài liệu liên quan trong top-3**; câu 4 có tài liệu liên quan nhưng không đứng top-1. Đây là kết quả thực tế của lần chạy hiện tại, chưa phải kết luận cuối về chất lượng ngữ nghĩa vì README yêu cầu dùng `EMBEDDING_PROVIDER=local`. Khi chạy local, cần ghi lại top-3 và score mới vào bảng này.
 
 Thử metadata filter với `{'customer_role': 'seller'}` cho câu hỏi về trách nhiệm người bán cho thấy filter hoạt động đúng: các kết quả trả về đều có `customer_role=seller`. Tuy nhiên filter chỉ cải thiện phạm vi ứng viên; chất lượng xếp hạng vẫn phụ thuộc embedding và chunking.
+
+### Phân tích lỗi và hướng cải thiện
+
+- Câu 1 bị đẩy về `shopee-complaint-001` thay vì tài liệu trả hàng; truy vấn có từ “yêu cầu” và “thời hạn” nhưng mock embedding không nhận diện đúng ngữ cảnh chính sách trả hàng.
+- Câu 2 trả về `shopee-product-listing-rules` thay vì `shopee-shipping-policy`; hai chủ đề đều liên quan đến trách nhiệm người bán nhưng khác nghiệp vụ.
+- Câu 3 trả về chính sách hoàn tiền thay vì danh mục sản phẩm cấm/hạn chế; đây là nhiễu ngữ nghĩa rõ nhất trong benchmark.
+- Câu 5 trả về chính sách chống gian lận thay vì FAQ hủy đơn; từ khóa “hủy” chưa đủ để bù cho chất lượng embedding thấp.
+
+Nguyên nhân chính là `_mock_embed` gần như ngẫu nhiên theo chuỗi, chưa có reranker và corpus còn các tài liệu listing có nội dung gần nhau (`shopee-listing-policy` và `shopee-product-listing-rules`). Hướng xử lý là chạy local multilingual embedding, gộp hoặc phân biệt rõ các tài liệu listing, bổ sung reranker dựa trên từ khóa/chủ đề và benchmark lại cả top-1 lẫn top-3. Metadata filter nên được dùng trước retrieval cho các câu hỏi có vai trò rõ ràng, nhưng không thể thay thế embedding phù hợp.
+
+### Tái lập kết quả
+
+Các lệnh chính để tái lập phần cá nhân:
+
+```bash
+python -m unittest discover -s tests -v
+python ingest.py
+```
+
+Benchmark hiện tại dùng `_mock_embed` và kết quả được ghi ở mục 3 và mục 5. Khi dependency local đã sẵn sàng, chạy lại với `EMBEDDING_PROVIDER=local` rồi thay bảng benchmark bằng top-k, score và nguồn mới; không trộn kết quả mock với kết quả local.
 
 ## Tự đánh giá
 
@@ -128,3 +174,4 @@ Thử metadata filter với `{'customer_role': 'seller'}` cho câu hỏi về tr
 | Kết quả truy xuất | 6 / 10 |
 | **Tổng** | **56 / 60** |
 
+> Điểm tự đánh giá phần retrieval được điều chỉnh theo kết quả thực tế: 1/5 câu có tài liệu liên quan trong top-3 khi dùng mock embedding. Pipeline, metadata filter và phân tích lỗi đã hoàn thiện, nhưng chất lượng retrieval cần được đánh giá lại bằng local multilingual embedder.

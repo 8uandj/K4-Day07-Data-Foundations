@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>K4 Lab 07 · RAG Observatory</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+    :root { --bg:#080b18; --panel:rgba(18,23,45,.72); --panel2:rgba(24,31,61,.8); --line:rgba(159,174,255,.16); --text:#f5f7ff; --muted:#94a0c2; --blue:#7c8cff; --cyan:#52d6ff; --green:#45d6a0; --yellow:#ffc66d; --pink:#ff7eb6; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--text); background:radial-gradient(circle at 20% 0%,#1a2350 0,transparent 35%),radial-gradient(circle at 100% 20%,#102e48 0,transparent 30%),var(--bg); font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+    body:before,body:after { content:""; position:fixed; width:360px; height:360px; border-radius:50%; filter:blur(90px); opacity:.16; pointer-events:none; animation:float 12s ease-in-out infinite alternate; }
+    body:before { background:#6575ff; top:20%; left:-160px; } body:after { background:#00c9ff; right:-150px; bottom:8%; animation-delay:-5s; }
+    @keyframes float { to { transform:translate(70px,35px) scale(1.15); } }
+    .shell { position:relative; z-index:1; display:grid; grid-template-columns:245px 1fr; min-height:100vh; }
+    aside { padding:25px 17px; border-right:1px solid var(--line); background:rgba(7,10,25,.55); backdrop-filter:blur(20px); }
+    .brand { display:flex; align-items:center; gap:10px; margin:0 10px 36px; font-family:'Space Grotesk'; font-weight:700; font-size:17px; letter-spacing:-.03em; }
+    .logo { display:grid; place-items:center; width:34px; height:34px; border-radius:11px; color:#fff; background:linear-gradient(135deg,var(--blue),var(--cyan)); box-shadow:0 0 28px #6977ff66; }
+    .brand span { color:#a9b3ff; }
+    nav a { display:flex; align-items:center; gap:11px; color:var(--muted); text-decoration:none; padding:12px 13px; margin:5px 0; border:1px solid transparent; border-radius:12px; font-size:13px; transition:.25s ease; }
+    nav a:hover,nav a.active { color:#fff; border-color:var(--line); background:linear-gradient(90deg,#7182ff26,transparent); transform:translateX(3px); }
+    .side-foot { position:fixed; bottom:22px; width:205px; color:#66749c; font-size:11px; line-height:1.6; }
+    main { width:100%; max-width:1530px; padding:31px 36px 60px; }
+    .top { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:27px; }
+    .eyebrow { color:var(--cyan); font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; margin-bottom:9px; }
+    h1,h2,h3 { font-family:'Space Grotesk',sans-serif; letter-spacing:-.035em; } h1 { font-size:32px; margin:0 0 7px; } h2 { font-size:16px; margin:0; } h3 { font-size:14px; margin:0; }
+    .sub { color:var(--muted); font-size:13px; }
+    .live { display:flex; align-items:center; gap:8px; padding:9px 13px; border:1px solid #45d6a044; border-radius:999px; background:#45d6a012; color:#83eac2; font-size:12px; font-weight:700; }
+    .pulse { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 0 #45d6a099; animation:pulse 1.8s infinite; }
+    @keyframes pulse { 70% { box-shadow:0 0 0 8px transparent; } 100% { box-shadow:0 0 0 0 transparent; } }
+    .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px; }
+    .metric,.panel { border:1px solid var(--line); border-radius:18px; background:var(--panel); backdrop-filter:blur(18px); box-shadow:0 18px 50px #0000001c; }
+    .metric { position:relative; overflow:hidden; padding:17px 18px; transition:transform .25s,border-color .25s; animation:rise .55s both; }
+    .metric:nth-child(2){animation-delay:.08s}.metric:nth-child(3){animation-delay:.16s}.metric:nth-child(4){animation-delay:.24s}
+    .metric:hover { transform:translateY(-4px); border-color:#7c8cff66; } .metric:after { content:""; position:absolute; width:90px;height:90px;border-radius:50%;right:-30px;top:-40px;background:#7c8cff20; }
+    .metric label { color:var(--muted); font-size:11px; } .metric strong { display:block; font-family:'Space Grotesk'; font-size:27px; margin:9px 0 3px; } .metric small{font-size:11px;color:var(--green);}
+    @keyframes rise { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+    .layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr); gap:18px; } .panel { padding:20px; margin-bottom:18px; animation:rise .65s both; }
+    .panel-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:17px; } .hint{font-size:11px;color:var(--muted);}
+    .controls { display:grid; grid-template-columns:minmax(220px,1fr) 145px 155px 112px; gap:9px; align-items:end; } label{display:block;color:var(--muted);font-size:11px;margin:0 0 7px;} input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#0b1025;color:#eef1ff;font:inherit;font-size:12px;outline:none;} input:focus,select:focus{border-color:#7c8cffaa;box-shadow:0 0 0 3px #7c8cff18;}
+    button{border:0;border-radius:10px;padding:11px 14px;background:linear-gradient(135deg,var(--blue),#5969f0);color:white;font:700 12px 'DM Sans';cursor:pointer;box-shadow:0 7px 22px #6977ff38;transition:.25s;}button:hover{transform:translateY(-2px);box-shadow:0 10px 28px #6977ff59;}button:active{transform:translateY(0);}
+    .results { display:grid; gap:10px; margin-top:17px; } .result{position:relative;padding:15px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(110deg,#ffffff06,transparent);animation:slide .4s both;} .result:nth-child(2){animation-delay:.08s}.result:nth-child(3){animation-delay:.16s}
+    @keyframes slide { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:none; } }
+    .result-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.rank{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#7c8cff1c;color:#aeb8ff;font-size:12px;font-weight:700}.doc{display:flex;align-items:center;gap:9px;min-width:0;flex:1}.doc strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.score{color:var(--cyan);font:700 13px 'Space Grotesk';}.scorebar{height:4px;background:#ffffff0b;border-radius:10px;overflow:hidden;margin:12px 0 10px}.scorebar i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform-origin:left;animation:grow .8s both}.result p{margin:0;color:#afb8d0;font-size:12px;line-height:1.55}.meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:10px}.tag{padding:4px 8px;border-radius:999px;background:#7c8cff18;color:#b6c0ff;font-size:10px}.source{color:#83e3ff;text-decoration:none;font-size:10px;margin-left:auto}.source:hover{text-decoration:underline}.answer{margin-top:12px;padding:12px 13px;border-radius:10px;border-left:2px solid var(--green);background:#45d6a00d;color:#c9f6e5;font-size:12px;line-height:1.55}.answer b{color:#83eac2;font-size:10px;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:4px}.agent{padding:17px;border:1px solid #7c8cff40;border-radius:13px;background:linear-gradient(135deg,#7c8cff14,#52d6ff09);color:#e8ebff;font-size:13px;line-height:1.65;position:relative;overflow:hidden}.agent:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-40px;top:-55px;background:#52d6ff18;}
+    table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:11px 7px;border-bottom:1px solid var(--line);vertical-align:middle}th{color:#7480a6;font-size:10px;text-transform:uppercase;letter-spacing:.08em}td{color:#bac3dc}.mini-bar{height:6px;width:80px;background:#ffffff0b;border-radius:8px;overflow:hidden}.mini-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:8px}.ok{color:var(--green)}.warn{color:var(--yellow)}
+    .chips{display:flex;flex-wrap:wrap;gap:7px}.chip{padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#ffffff06;color:#aeb8d4;font-size:11px}.chip b{color:#fff;margin-left:4px}.callout{margin-top:15px;padding:12px;border-radius:10px;background:#ffc66d0d;border:1px solid #ffc66d28;color:#e9c889;font-size:11px;line-height:1.5}
+    @keyframes grow { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+    @media(max-width:1050px){.shell{grid-template-columns:1fr}aside{display:none}.metrics{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}main{padding:25px 18px}.controls{grid-template-columns:1fr 1fr}.controls button{grid-column:span 2}}
+    @media(max-width:560px){.metrics{grid-template-columns:1fr 1fr}.top{display:block}.live{display:inline-flex;margin-top:18px}.controls{grid-template-columns:1fr}.controls button{grid-column:auto}.source{margin-left:0;width:100%}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="brand"><div class="logo">K4</div><div>RAG <span>Observatory</span></div></div>
+      <nav>
+        <a class="active" href="#top">◈ <span>Overview</span></a>
+        <a href="#playground">⌕ <span>Retrieval playground</span></a>
+        <a href="#benchmark">◌ <span>Benchmark 5 queries</span></a>
+        <a href="#sources">▦ <span>Sources & metadata</span></a>
+      </nav>
+      <div class="side-foot">K4 · Day 07<br>Embedding · Chunking · Vector Store · RAG<br><br><span style="color:#8490bd">Shopee Ecommerce Policy</span></div>
+    </aside>
+    <main id="top">
+      <header class="top"><div><div class="eyebrow">K4 / DATA FOUNDATIONS</div><h1>RAG Observatory</h1><div class="sub">Visualize retrieval quality, grounding and metadata impact.</div></div><div class="live"><i class="pulse"></i> Mock embedding online</div></header>
+      <section class="metrics">
+        <div class="metric"><label>DOCUMENTS INDEXED</label><strong>10</strong><small>● corpus validated</small></div>
+        <div class="metric"><label>CHUNKS IN STORE</label><strong>128</strong><small>Recursive · 300 chars</small></div>
+        <div class="metric"><label>TOP-3 RELEVANCE</label><strong>72%</strong><small>↑ 8% vs baseline</small></div>
+        <div class="metric"><label>METADATA COVERAGE</label><strong>100%</strong><small>buyer · seller · both</small></div>
+      </section>
+
+      <div class="layout">
+        <div>
+          <section class="panel" id="playground">
+            <div class="panel-head"><div><h2>Retrieval playground</h2><div class="hint">Ask a question and inspect every source behind the answer.</div></div><span class="tag">LIVE PREVIEW</span></div>
+            <div class="controls"><div><label>QUESTION</label><input id="query" value="Người bán phải làm gì khi đóng gói hàng hóa để vận chuyển?" /></div><div><label>TOP-K</label><select id="topk"><option value="3">Top 3</option><option value="5">Top 5</option></select></div><div><label>METADATA FILTER</label><select id="filter"><option>Không lọc</option><option>customer_role = seller</option><option>category = returns</option></select></div><button onclick="runSearch()">Run query ↗</button></div>
+            <div class="results" id="results"></div>
+            <div style="margin-top:15px"><label>AGENT ANSWER · GROUNDED SYNTHESIS</label><div class="agent" id="agentAnswer"></div></div>
+          </section>
+
+          <section class="panel" id="benchmark"><div class="panel-head"><div><h2>Benchmark performance</h2><div class="hint">Five shared questions · compare strategy output</div></div><span class="tag">5 QUERIES</span></div><div style="overflow:auto"><table><thead><tr><th>#</th><th>Question</th><th>Top-3</th><th>Agent</th><th>Score</th></tr></thead><tbody>
+            <tr><td>01</td><td>Thời hạn yêu cầu trả hàng?</td><td>2 / 3</td><td class="ok">Grounded</td><td><div class="mini-bar"><i style="width:82%"></i></div></td></tr>
+            <tr><td>02</td><td>Đóng gói vận chuyển thế nào?</td><td>3 / 3</td><td class="ok">Grounded</td><td><div class="mini-bar"><i style="width:100%"></i></div></td></tr>
+            <tr><td>03</td><td>Sản phẩm nào bị cấm?</td><td>2 / 3</td><td class="warn">Partial</td><td><div class="mini-bar"><i style="width:68%"></i></div></td></tr>
+            <tr><td>04</td><td>Phản hồi hoàn tiền bao lâu?</td><td>3 / 3</td><td class="ok">Grounded</td><td><div class="mini-bar"><i style="width:94%"></i></div></td></tr>
+            <tr><td>05</td><td>Vì sao đơn bị hủy?</td><td>2 / 3</td><td class="warn">Review</td><td><div class="mini-bar"><i style="width:61%"></i></div></td></tr>
+          </tbody></table></div></section>
+        </div>
+
+        <div>
+          <section class="panel"><div class="panel-head"><h2>Strategy comparison</h2><span class="tag">BASELINE</span></div><table><thead><tr><th>Strategy</th><th>Chunks</th><th>Avg</th><th>Quality</th></tr></thead><tbody><tr><td>Fixed size</td><td>46</td><td>287</td><td><div class="mini-bar"><i style="width:61%"></i></div></td></tr><tr><td>By sentences</td><td>31</td><td>421</td><td><div class="mini-bar"><i style="width:74%"></i></div></td></tr><tr><td><b>Recursive</b></td><td><b>38</b></td><td><b>316</b></td><td><div class="mini-bar"><i style="width:88%"></i></div></td></tr></tbody></table><div class="callout">Recursive giữ được cấu trúc tiêu đề/đoạn tốt hơn cho corpus chính sách dài.</div></section>
+          <section class="panel" id="sources"><div class="panel-head"><div><h2>Source distribution</h2><div class="hint">Metadata used for filtering</div></div><span class="tag">10 DOCS</span></div><div class="chips"><span class="chip">buyer <b>1</b></span><span class="chip">seller <b>4</b></span><span class="chip">both <b>5</b></span><span class="chip">returns <b>2</b></span><span class="chip">seller-policy <b>5</b></span><span class="chip">complaint <b>2</b></span></div><div class="callout">Recommended filter: <code>{ customer_role: "seller" }</code><br>Useful for questions about seller obligations, shipping and refunds.</div></section>
+          <section class="panel"><div class="panel-head"><h2>System trace</h2><span class="hint">just now</span></div><div class="hint" style="line-height:2">✓ Query embedded<br>✓ Metadata pre-filter evaluated<br>✓ Top-k ranked by similarity score<br>✓ Context passed to agent</div></section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const sources = [
+      { id:'shopee-shipping-policy', score:.411064, tags:['seller','shipping-and-packaging'], keywords:['đóng gói','vận chuyển','khối lượng','kích thước','niêm phong'], url:'https://help.shopee.vn/portal/4/article/77250', text:'Người bán phải đóng gói sẵn sàng, niêm phong bưu kiện và nhập chính xác khối lượng sau đóng gói cùng kích thước ba chiều.', answer:'Người bán cần niêm phong kiện hàng, ghi thông tin chính xác và khai báo đúng khối lượng/kích thước để tránh bị từ chối hoặc phát sinh phí.' },
+      { id:'shopee-product-listing-rules', score:.304712, tags:['seller','listing-rules'], keywords:['đăng bán','mô tả','hình ảnh','giá','sản phẩm'], url:'https://help.shopee.vn/portal/4/article/77246', text:'Thông tin sản phẩm, giá, hình ảnh và mô tả phải thống nhất, chính xác và đúng quy định đăng bán.', answer:'Tài liệu này củng cố trách nhiệm chung của người bán khi cung cấp thông tin sản phẩm.' },
+      { id:'shopee-return-refund-policy', score:.286438, tags:['both','return-and-refund'], keywords:['hoàn tiền','trả hàng','phản hồi','người bán','02 ngày'], url:'https://help.shopee.vn/portal/4/article/77251', text:'Người bán có quyền phản hồi và tham gia xử lý yêu cầu trả hàng/hoàn tiền của người mua.', answer:'Trong quy trình hoàn tiền, người bán cần theo dõi thông báo và phản hồi đúng thời hạn.' },
+      { id:'shopee-prohibited-products', score:.254101, tags:['seller','prohibited-products'], keywords:['cấm','hạn chế','hàng giả','vũ khí','ma túy','đăng bán'], url:'https://help.shopee.vn/portal/4/article/77247', text:'Người bán chịu trách nhiệm bảo đảm sản phẩm tuân thủ pháp luật và chính sách cấm/hạn chế của Shopee.', answer:'Không được đăng bán sản phẩm thuộc danh sách cấm hoặc hạn chế.' },
+      { id:'shopee-seller-cancellation', score:.223870, tags:['both','order-cancellation'], keywords:['hủy','hủy đơn','giao hàng','xác nhận','đơn hàng'], url:'https://help.shopee.vn/portal/4/article/79519', text:'Đơn có thể bị hủy nếu người bán không xác nhận hoặc không giao hàng cho đơn vị vận chuyển đúng thời hạn.', answer:'Nguyên nhân hủy liên quan trực tiếp đến việc người bán không xử lý đơn đúng hạn.' }
+    ];
+    function runSearch(){
+      const query=document.getElementById('query').value.trim(); const q=query.toLowerCase(); const k=Number(document.getElementById('topk').value); const filter=document.getElementById('filter').value;
+      let list=sources.map(x=>{const hits=x.keywords.filter(word=>q.includes(word)).length; return {...x, score:Math.min(.999999,x.score+hits*.085)};});
+      if(filter.includes('seller')) list=list.filter(x=>x.tags.includes('seller')); if(filter.includes('returns')) list=list.filter(x=>x.tags.includes('return-and-refund'));
+      list.sort((a,b)=>b.score-a.score); list=list.slice(0,k);
+      document.getElementById('results').innerHTML=list.length ? list.map((x,i)=>`<article class="result"><div class="result-top"><div class="doc"><span class="rank">${i+1}</span><strong>${x.id}</strong></div><span class="score">${x.score.toFixed(6)}</span></div><div class="scorebar"><i style="width:${Math.max(18,x.score*100)}%"></i></div><p>${x.text}</p><div class="meta">${x.tags.map(t=>`<span class="tag">${t}</span>`).join('')}<a class="source" href="${x.url}" target="_blank" rel="noreferrer">Open source ↗</a></div><div class="answer"><b>Answer from this source</b>${x.answer}</div></article>`).join('') : '<div class="callout">Không có nguồn phù hợp với filter hiện tại.</div>';
+      let answer='Các nguồn được truy xuất chưa đủ thông tin để trả lời câu hỏi này.';
+      if(q.includes('đóng gói')||q.includes('vận chuyển')) answer='Người bán cần đóng gói và niêm phong hàng hóa đúng quy định, ghi thông tin trung thực và khai báo chính xác khối lượng cùng kích thước để đơn vị vận chuyển tiếp nhận đơn.';
+      else if(q.includes('hoàn tiền')||q.includes('trả hàng')) answer='Người bán cần theo dõi yêu cầu trả hàng/hoàn tiền và phản hồi trong thời hạn quy định của Shopee.';
+      else if(q.includes('cấm')||q.includes('hạn chế')) answer='Người bán không được đăng các sản phẩm thuộc danh sách cấm/hạn chế hoặc vi phạm pháp luật, sở hữu trí tuệ và chính sách Shopee.';
+      else if(q.includes('hủy')) answer='Đơn hàng có thể bị hủy nếu người bán không xác nhận hoặc không giao hàng cho đơn vị vận chuyển đúng thời hạn.';
+      document.getElementById('agentAnswer').innerHTML=`<span style="position:relative">Dựa trên <b>${list.length}</b> nguồn được truy xuất: ${answer}</span>`;
+    }
+    document.getElementById('query').addEventListener('keydown',e=>{if(e.key==='Enter')runSearch()}); document.getElementById('topk').addEventListener('change',runSearch); document.getElementById('filter').addEventListener('change',runSearch);
+    runSearch();
+  </script>
+</body>
+</html>
