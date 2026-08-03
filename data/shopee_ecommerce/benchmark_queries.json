@@ -1,0 +1,53 @@
+[
+  {
+    "id": "Q1",
+    "query_type": "thời hạn",
+    "query": "Người mua có thể yêu cầu trả hàng trong thời hạn bao lâu?",
+    "gold_answer": "Thời hạn là 24 giờ với thực phẩm tươi sống và đông lạnh; với đơn người bán tự vận chuyển là 15 ngày từ lúc người mua bấm Đã nhận được hàng hoặc 20 ngày từ lúc đơn chuyển sang Lấy hàng thành công; các đơn khác là 15 ngày từ khi giao hàng thành công.",
+    "expected_doc_id": "shopee-returns-001",
+    "expected_section": "Thời hạn gửi yêu cầu",
+    "metadata_filter": null
+  },
+  {
+    "id": "Q2",
+    "query_type": "quy trình",
+    "query": "Người bán phải làm gì khi đóng gói hàng hóa để vận chuyển?",
+    "gold_answer": "Người bán phải đóng gói bưu kiện sẵn sàng và niêm phong trước khi bàn giao; ghi thông tin bao bì chính xác, trung thực; nhập đúng khối lượng và kích thước sau đóng gói; đồng thời tuân thủ các điều kiện vận chuyển riêng của hàng hóa.",
+    "expected_doc_id": "shopee-shipping-policy",
+    "expected_section": "Chính sách vận chuyển Shopee",
+    "metadata_filter": {
+      "customer_role": "both"
+    }
+  },
+  {
+    "id": "Q3",
+    "query_type": "liệt kê",
+    "query": "Những sản phẩm nào bị cấm hoặc hạn chế đăng bán?",
+    "gold_answer": "Các nhóm chính gồm hàng giả và hàng xâm phạm sở hữu trí tuệ; nội dung liên quan khủng bố, chính trị hoặc an ninh; dịch vụ bất hợp pháp; vũ khí; ma túy và chất kích thích; thuốc lá; sản phẩm người lớn; thiết bị xâm nhập hoặc nghe lén; hóa chất nguy hiểm và chất cháy nổ; bộ phận người; hàng gây hại sức khỏe; thuốc hoặc vắc-xin bị cấm; động vật và chế phẩm động vật, cùng các nhóm hạn chế khác trong chính sách.",
+    "expected_doc_id": "shopee-prohibited-products",
+    "expected_section": "Nhóm sản phẩm bị cấm hoặc hạn chế",
+    "metadata_filter": {
+      "customer_role": "seller"
+    }
+  },
+  {
+    "id": "Q4",
+    "query_type": "thời hạn",
+    "query": "Người bán cần phản hồi yêu cầu hoàn tiền trong bao lâu?",
+    "gold_answer": "Người bán cần phản hồi trong vòng 02 ngày lịch kể từ ngày nhận thông báo của Shopee, hoặc trong thời hạn khác được Shopee quy định tại từng thời điểm.",
+    "expected_doc_id": "shopee-return-refund-policy",
+    "expected_section": "5. Quyền của Người Bán",
+    "metadata_filter": {
+      "customer_role": "both"
+    }
+  },
+  {
+    "id": "Q5",
+    "query_type": "nguyên nhân",
+    "query": "Vì sao đơn hàng có thể bị hủy do người bán?",
+    "gold_answer": "Đơn có thể bị hủy vì người bán không giao hàng cho đơn vị vận chuyển, không còn hoạt động, hoặc không xác nhận đơn hàng hay giao hàng trong thời gian Shopee quy định.",
+    "expected_doc_id": "shopee-seller-cancellation",
+    "expected_section": "Nguyên nhân đơn hàng bị hủy liên quan đến người bán",
+    "metadata_filter": null
+  }
+]
