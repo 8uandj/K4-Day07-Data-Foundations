@@ -99,11 +99,11 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | # | Câu hỏi (Query) | Câu trả lời chuẩn (Gold Answer) | Chunk nào chứa thông tin? |
 |---|-------|-------------------------------|--------------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+| 1 | Người mua có thể yêu cầu trả hàng trong thời hạn bao lâu? | | |
+| 2 | Người bán phải làm gì khi đóng gói hàng hóa để vận chuyển? | | |
+| 3 | Những sản phẩm nào bị cấm hoặc hạn chế đăng bán? | | |
+| 4 | Người bán cần phản hồi yêu cầu hoàn tiền trong bao lâu? | | |
+| 5 | Vì sao đơn hàng có thể bị hủy do người bán? | | |
 
 ### Tổng hợp chất lượng truy xuất của nhóm
 
@@ -111,11 +111,11 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | # | Câu hỏi | Chiến lược tốt nhất cho câu này | Có chunk liên quan trong top-3? | Ghi chú |
 |---|---------|-------------------------------|-------------------------------|---------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| 1 | Người mua có thể yêu cầu trả hàng trong thời hạn bao lâu? | | | |
+| 2 | Người bán phải làm gì khi đóng gói hàng hóa để vận chuyển? | | | |
+| 3 | Những sản phẩm nào bị cấm hoặc hạn chế đăng bán? | | | |
+| 4 | Người bán cần phản hồi yêu cầu hoàn tiền trong bao lâu? | | | |
+| 5 | Vì sao đơn hàng có thể bị hủy do người bán? | | | |
 
 **Lọc bằng metadata có giúp ích không? Ở câu hỏi nào?**
 > *Viết 2-3 câu:*
