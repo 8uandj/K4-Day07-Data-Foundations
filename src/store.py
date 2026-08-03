@@ -42,11 +42,14 @@ class EmbeddingStore:
     def _make_record(self, doc: Document) -> dict[str, Any]:
         embedding = self._embedding_fn(doc.content)
 
+        metadata = dict(doc.metadata)
+        metadata.setdefault("doc_id", doc.id)
+
         record = {
             "id": str(self._next_index),
             "content": doc.content,
             "embedding": embedding,
-            "metadata": dict(doc.metadata),
+            "metadata": metadata,
         }
 
         self._next_index += 1
@@ -86,7 +89,9 @@ class EmbeddingStore:
                 ids.append(str(self._next_index))
                 documents.append(doc.content)
                 embeddings.append(self._embedding_fn(doc.content))
-                metadatas.append(dict(doc.metadata))
+                metadata = dict(doc.metadata)
+                metadata.setdefault("doc_id", doc.id)
+                metadatas.append(metadata)
                 self._next_index += 1
 
             self._collection.add(
