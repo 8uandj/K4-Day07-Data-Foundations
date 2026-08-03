@@ -1,8 +1,8 @@
 # Báo Cáo Cá Nhân — Lab 7: Embedding & Vector Store
 
-**Họ tên:** [Tên sinh viên]
-**Nhóm:** [Tên nhóm]
-**Ngày:** [Ngày nộp]
+**Họ tên:** [Hoàng Duy Hưng]
+**Nhóm:** [MINIONS]
+**Ngày:** [03/08/2026]
 
 > **Nộp 1 bản / sinh viên.** Phần nhóm (lựa chọn tài liệu, thiết kế chiến lược, bộ câu hỏi đánh giá, demo) nộp chung 1 bản trong `REPORT_NHOM.md`. Chi tiết thang điểm: `docs/SCORING.md`.
 
@@ -15,20 +15,20 @@
 ### Độ tương tự Cosine (Cosine Similarity) (Bài tập 1.1)
 
 **Độ tương tự cosine cao (High cosine similarity) nghĩa là gì?**
-> *Viết 1-2 câu:*
+> High cosine similarity nghĩa là 2 đoạn nội dung có độ tương đồng cao về ngữ nghĩa
 
 **Ví dụ có độ tương tự CAO:**
-- Câu A:
-- Câu B:
-- Tại sao tương đồng:
+- Câu A: Cat lies on sofa
+- Câu B: Con mèo nằm trên sô pha
+- Tại sao tương đồng: Cùng ngữ nghĩa nhưng khác ngôn ngữ
 
 **Ví dụ có độ tương tự THẤP:**
-- Câu A:
-- Câu B:
-- Tại sao khác:
+- Câu A: Huy đang ăn cơm
+- Câu B: Bảo đang đá bóng
+- Tại sao khác: Không có sự liên quan nào giữa 2 câu này
 
 **Tại sao độ tương tự cosine (cosine similarity) được ưu tiên hơn khoảng cách Euclid (Euclidean distance) cho text embeddings?**
-> *Viết 1-2 câu:*
+> 
 
 ### Bài toán tính toán Chunking (Bài tập 1.2)
 
