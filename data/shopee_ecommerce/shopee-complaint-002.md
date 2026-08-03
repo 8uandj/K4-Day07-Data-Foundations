@@ -1,33 +1,35 @@
 ---
-doc_id: shopee-complaint-002
-title: Ưu tiên xử lý khiếu nại cho người tiêu dùng dễ bị tổn thương và trường hợp người bán nước ngoài
+doc_id: shopee-complaint-001
+title: Quy trình 4 bước giải quyết khiếu nại Trả hàng/Hoàn tiền
 source_url: https://help.shopee.vn/portal/4/article/77265-QUY%20TRI%CC%80NH%20GIA%CC%89I%20QUY%C3%8A%CC%81T%20TRANH%20CH%C3%82%CC%81P/%20X%C6%AF%CC%89%20LY%CC%81%20KHI%C3%8A%CC%81U%20NA%CC%A3I
 retrieved_at: "2026-08-03"
-document_version: "not-stated"
-effective_date: "not-stated"
+document_version: "2024-03-15"
+effective_date: "2024-03-22"
 platform: shopee
 customer_role: buyer
 category: complaint
-subcategory: vulnerable-consumer-priority
+subcategory: complaint-process
 language: vi
 region: VN
 source_type: official-policy
 license_or_permission: public-page
-content_type: policy
+content_type: procedure
 authority_level: official
 last_verified_at: "2026-08-03"
 ---
 
-# Ưu tiên xử lý khiếu nại cho người tiêu dùng dễ bị tổn thương và trường hợp người bán nước ngoài
+# Quy trình 4 bước giải quyết khiếu nại Trả hàng/Hoàn tiền
 
-## Ưu tiên đối với người tiêu dùng dễ bị tổn thương
+## Nguyên tắc xử lý chung
 
-Theo Luật Bảo vệ Quyền lợi Người tiêu dùng 2023, nếu người khiếu nại là người tiêu dùng dễ bị tổn thương, người đó cần cung cấp tài liệu/chứng cứ chứng minh tình trạng của mình theo quy định pháp luật liên quan. Khi đã cung cấp đầy đủ chứng cứ hợp lệ, khiếu nại của người này sẽ được Shopee ưu tiên tiếp nhận, xử lý trước so với quy trình thông thường đang áp dụng. Người bán và các bên liên quan (đơn vị vận chuyển, đơn vị thanh toán...) cũng có trách nhiệm ưu tiên tiếp nhận, xử lý khiếu nại của nhóm người tiêu dùng này theo chính sách riêng của từng bên, phù hợp quy định pháp luật.
+Khi có tranh chấp hoặc khiếu nại phát sinh giữa người mua và người bán, Shopee ưu tiên khuyến khích hai bên tự thương lượng, hòa giải để đạt được thỏa thuận trước khi Shopee can thiệp sâu. Nếu không thể tự giải quyết, Shopee sẽ tiếp nhận và xử lý dựa trên quy định, chính sách hiện hành.
 
-## Trường hợp người bán ở nước ngoài
+## Các bước khiếu nại Trả hàng/Hoàn tiền
 
-Nếu khiếu nại liên quan đến hàng hóa/dịch vụ do người bán nước ngoài cung cấp, Shopee đóng vai trò đại diện để giải quyết khiếu nại của người tiêu dùng, theo quy định về đại diện trong Bộ luật Dân sự.
+**Bước 1 — Gửi yêu cầu:** Người mua mở khiếu nại Trả Hàng/Hoàn Tiền ngay trong ứng dụng hoặc website Shopee, tại mục "Đơn Mua" của đơn hàng liên quan. Với các tranh chấp không thuộc dạng Trả Hàng/Hoàn Tiền, người mua liên hệ qua kênh Chăm Sóc Khách Hàng thay vì mục khiếu nại đơn hàng.
 
-## Tính chất quyết định của Shopee
+**Bước 2 — Tiếp nhận:** Bộ phận giải quyết khiếu nại của Shopee ghi nhận yêu cầu và áp dụng biện pháp hỗ trợ phù hợp với tính chất, mức độ của từng vụ việc.
 
-Quyết định xử lý của Shopee được xem là quyết định cuối cùng trong phạm vi thẩm quyền của sàn, trừ trường hợp vụ việc được đưa ra giải quyết bởi cơ quan nhà nước có thẩm quyền theo quy định pháp luật. Người bán trên sàn có trách nhiệm cung cấp thông tin/tài liệu đầy đủ, chính xác, trung thực liên quan đến sản phẩm khi được yêu cầu phục vụ giải quyết khiếu nại; hành vi gian lận, lừa đảo trong kinh doanh sẽ phải chịu trách nhiệm trước pháp luật.
+**Bước 3 — Xử lý theo chính sách:** Khiếu nại Trả Hàng/Hoàn Tiền được xử lý theo Chính Sách Trả Hàng và Hoàn Tiền hiện hành của Shopee. Với các tranh chấp khác, Shopee yêu cầu các bên cung cấp đầy đủ thông tin/tài liệu liên quan và đưa ra hướng giải quyết trong khoảng 7 ngày làm việc kể từ khi nhận đủ hồ sơ; nếu vụ việc có nhiều tình tiết phức tạp, thời hạn này có thể kéo dài hơn.
+
+**Bước 4 — Chuyển cơ quan có thẩm quyền (nếu cần):** Nếu vụ việc vượt quá khả năng và thẩm quyền xử lý của sàn, Shopee sẽ yêu cầu các bên tranh chấp đưa vụ việc ra cơ quan nhà nước có thẩm quyền để giải quyết theo pháp luật.
