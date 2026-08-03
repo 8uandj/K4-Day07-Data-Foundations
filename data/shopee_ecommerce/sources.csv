@@ -1,3 +1,4 @@
 doc_id,file_path,title,source_url,retrieved_at,document_version,license_or_permission
+shopee-prohibited-products,data/shopee_ecommerce/shopee-prohibited-products.md,Chính sách cấm/hạn chế sản phẩm trên Shopee,https://help.shopee.vn/portal/4/article/77247,2026-08-03,2025-04-28,public-page
 shopee-product-listing-rules,data/shopee_ecommerce/shopee-product-listing-rules.md,Quy định về đăng bán sản phẩm trên Shopee,https://help.shopee.vn/portal/4/article/77246,2026-08-03,2024-08-14,public-page
 shopee-return-refund-policy,data/shopee_ecommerce/shopee-return-refund-policy.md,Chính sách trả hàng và hoàn tiền,https://help.shopee.vn/portal/4/article/77251?seo=1,2026-08-03,2026-03-11,public-page

@@ -1,12 +1,21 @@
 ---
-doc_id: "shopee-product-listing-rules"
-title: "Quy định về đăng bán sản phẩm trên Shopee"
-source_url: "https://help.shopee.vn/portal/4/article/77246"
+doc_id: shopee-product-listing-rules
+title: Quy định về đăng bán sản phẩm trên Shopee
+source_url: https://help.shopee.vn/portal/4/article/77246
 retrieved_at: "2026-08-03"
 document_version: "2024-08-14"
-customer_role: "seller"
-category: "product-listing"
-language: "vi"
+effective_date: "not-stated"
+platform: shopee
+customer_role: seller
+category: seller-policy
+subcategory: listing-rules
+language: vi
+region: VN
+source_type: official-policy
+license_or_permission: public-page
+content_type: policy
+authority_level: official
+last_verified_at: "2026-08-03"
 ---
 
 # Quy định về đăng bán sản phẩm trên Shopee
