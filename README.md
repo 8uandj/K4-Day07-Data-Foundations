@@ -9,7 +9,7 @@
 Sau bài thực hành (lab) này, bạn cần có thể:
 - Giải thích độ tương tự cosine (cosine similarity) và dự đoán điểm tương đồng giữa các văn bản
 - Triển khai 3 chiến lược chia nhỏ (chunking) và so sánh ưu nhược điểm
-- Xây dựng kho lưu trữ vector (vector store) với các tính năng tìm kiếm (search), lọc (filter), và xóa (delete)
+- Xây dựng kho lưu trữ vector (vector store) với các tính năng tìm kiếm (search), lọc (filter), và xóa (del ete)
 - Kết nối cơ sở tri thức (knowledge base) với tác tử (agent) qua mô hình RAG
 - Chỉ ra khi nào việc truy xuất (retrieval) giúp ích và khi nào nó thất bại
 
