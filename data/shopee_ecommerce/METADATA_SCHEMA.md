@@ -41,7 +41,7 @@ last_verified_at: "2026-08-03"
 | `effective_date` | Nên có | Ngày hiệu lực hoặc `not-stated` |
 | `platform` | Có | `shopee` |
 | `customer_role` | Có | `buyer`, `seller` hoặc `both` |
-| `category` | Có | `returns`, `refund`, `seller-policy`, `listing-policy`, `complaint` |
+| `category` | Có | `returns`, `refund`, `seller-policy`, `listing-policy`, `complaint`, `anti-fraud`, `payment`, `voucher-policy` |
 | `subcategory` | Nên có | Ví dụ `return-conditions`, `refund-timeline`, `seller-violation` |
 | `language` | Có | `vi` |
 | `region` | Nên có | `VN` |
@@ -84,4 +84,3 @@ Các trường dùng chính cho retrieval filter:
 - `sources.csv` có đúng 10 dòng dữ liệu.
 - `sources.csv.file_path` trỏ đúng đến file thực tế.
 - Nội dung benchmark có thể kiểm chứng từ corpus này.
-

@@ -1,12 +1,21 @@
 ---
 doc_id: shopee-vay-001
 title: Vay tiền nhanh
-customer_role: buyer        # buyer | seller | both
-category: loan
+customer_role: buyer
+category: payment
+subcategory: loan-faq
 language: vi
+region: VN
+platform: shopee
+source_type: official-faq
+license_or_permission: public-page
+content_type: faq
+authority_level: official
+last_verified_at: "2026-08-03"
 source_url: https://help.cs.shopeepay.vn/portal/100/article/76650-%5BSEasy-Vay-Ti%E1%BB%81n-Nhanh%5D-C%C3%A1c-c%C3%A2u-h%E1%BB%8Fi-th%C6%B0%E1%BB%9Dng-g%E1%BA%B7p?previousPage=secondary%20category
-retrieved_at: 2026-08-03
+retrieved_at: "2026-08-03"
 document_version: "2026.1"
+effective_date: "not-stated"
 ---
 
 1. Lợi ích của SEasy Vay Tiền Nhanh là gì?

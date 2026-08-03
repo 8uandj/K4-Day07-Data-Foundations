@@ -1,12 +1,21 @@
 ---
 doc_id: shopee-seller-anti-fraud-policy
 title: Chính sách chống hành vi gian lận trên sàn Shopee và các biện pháp xử lý đối với Người bán vi phạm
-customer_role: seller        # buyer | seller | both
-category: anti-fraud
-language: vi
 source_url: https://help.shopee.vn/portal/4/article/140097?previousPage=other+articles
-retrieved_at: 2026-08-03
+retrieved_at: "2026-08-03"
 document_version: "2023-12-26"
+effective_date: "not-stated"
+platform: shopee
+customer_role: seller
+category: anti-fraud
+subcategory: seller-fraud
+language: vi
+region: VN
+source_type: official-policy
+license_or_permission: public-page
+content_type: policy
+authority_level: official
+last_verified_at: "2026-08-03"
 ---
 
 # CHÍNH SÁCH CHỐNG HÀNH VI GIAN LẬN TRÊN SÀN SHOPEE VÀ CÁC BIỆN PHÁP XỬ LÝ ĐỐI VỚI NGƯỜI BÁN VI PHẠM

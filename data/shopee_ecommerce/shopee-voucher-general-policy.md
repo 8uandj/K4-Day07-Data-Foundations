@@ -1,12 +1,21 @@
 ---
 doc_id: shopee-voucher-general-policy
 title: Chính sách chung về Mã ưu đãi Shopee
-customer_role: buyer        # buyer | seller | both
+customer_role: both
 category: voucher-policy
+subcategory: general-voucher
 language: vi
+region: VN
+platform: shopee
+source_type: official-policy
+license_or_permission: public-page
+content_type: policy
+authority_level: official
+last_verified_at: "2026-08-03"
 source_url: https://help.shopee.vn/portal/4/article/166085?previousPage=other%20articles
-retrieved_at: 2026-08-03
+retrieved_at: "2026-08-03"
 document_version: "2026-05-14"
+effective_date: "not-stated"
 ---
 
 # CHÍNH SÁCH CHUNG VỀ MÃ ƯU ĐÃI SHOPEE

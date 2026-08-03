@@ -1,12 +1,21 @@
 ---
 doc_id: shopee-returns-001
 title: Chính sách đổi trả
-customer_role: buyer        # buyer | seller | both
+customer_role: buyer
 category: returns
+subcategory: return-conditions
 language: vi
-source_url: https://example.com/chinh-sach/doi-tra
-retrieved_at: 2026-08-03
+region: VN
+platform: shopee
+source_type: unverified
+license_or_permission: needs-review
+content_type: policy
+authority_level: unverified
+last_verified_at: "2026-08-03"
+source_url: https://help.shopee.vn/portal/4/article/188931-%5BTr%E1%BA%A3-h%C3%A0ng%2FHo%C3%A0n-ti%E1%BB%81n%5D-Nh%E1%BB%AFng-quy-%C4%91%E1%BB%8Bnh-chung-v%E1%BB%81-Tr%E1%BA%A3-h%C3%A0ng%2FHo%C3%A0n-ti%E1%BB%81n-c%E1%BB%A7a-Shopee?previousPage=secondary%20category
+retrieved_at: "2026-08-03"
 document_version: "2026.1"
+effective_date: "not-stated"
 ---
 
 [Trả hàng/Hoàn tiền] Những quy định chung về Trả hàng/Hoàn tiền của Shopee
