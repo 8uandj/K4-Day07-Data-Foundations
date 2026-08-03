@@ -4,11 +4,11 @@ title: Chính sách chống hành vi gian lận trên sàn Shopee và các biệ
 source_url: https://help.shopee.vn/portal/4/article/140097?previousPage=other+articles
 retrieved_at: "2026-08-03"
 document_version: "2023-12-26"
-effective_date: "not-stated"
+effective_date: "2023-12-28"
 platform: shopee
 customer_role: seller
 category: anti-fraud
-subcategory: seller-fraud
+subcategory: seller-penalties
 language: vi
 region: VN
 source_type: official-policy
