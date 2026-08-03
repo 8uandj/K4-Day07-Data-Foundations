@@ -36,10 +36,10 @@ Chạy `pytest tests/` để kiểm tra tiến độ.
 ### Danh sách cần làm (Checklist)
 - [x] `Document` dataclass — ĐÃ TRIỂN KHAI SẴN
 - [x] `FixedSizeChunker` — ĐÃ TRIỂN KHAI SẴN
-- [ ] `SentenceChunker` — tách dựa trên ranh giới câu, nhóm lại thành các chunks
-- [ ] `RecursiveChunker` — thử nghiệm các dấu phân cách (separators) theo thứ tự, thực hiện đệ quy trên các đoạn có kích thước quá lớn
-- [ ] `compute_similarity` — công thức tính độ tương tự cosine kèm cơ chế bảo vệ chia cho 0
-- [ ] `ChunkingStrategyComparator` — gọi cả ba chiến lược, tính toán các chỉ số thống kê
+- [x] `SentenceChunker` — tách dựa trên ranh giới câu, nhóm lại thành các chunks
+- [x] `RecursiveChunker` — thử nghiệm các dấu phân cách (separators) theo thứ tự, thực hiện đệ quy trên các đoạn có kích thước quá lớn
+- [x] `compute_similarity` — công thức tính độ tương tự cosine kèm cơ chế bảo vệ chia cho 0
+- [x] `ChunkingStrategyComparator` — gọi cả ba chiến lược, tính toán các chỉ số thống kê
 - [ ] `EmbeddingStore.__init__` — khởi tạo store (lưu trữ trong bộ nhớ hoặc ChromaDB)
 - [ ] `EmbeddingStore.add_documents` — nhúng (embed) và lưu trữ từng tài liệu
 - [ ] `EmbeddingStore.search` — nhúng truy vấn, xếp hạng theo tích vô hướng (dot product)
