@@ -3,8 +3,8 @@ doc_id: shopee-complaint-001
 title: Quy trình 4 bước giải quyết khiếu nại Trả hàng/Hoàn tiền
 source_url: https://help.shopee.vn/portal/4/article/77265-QUY%20TRI%CC%80NH%20GIA%CC%89I%20QUY%C3%8A%CC%81T%20TRANH%20CH%C3%82%CC%81P/%20X%C6%AF%CC%89%20LY%CC%81%20KHI%C3%8A%CC%81U%20NA%CC%A3I
 retrieved_at: "2026-08-03"
-document_version: "not-stated"
-effective_date: "not-stated"
+document_version: "2024-03-15"
+effective_date: "2024-03-22"
 platform: shopee
 customer_role: buyer
 category: complaint
